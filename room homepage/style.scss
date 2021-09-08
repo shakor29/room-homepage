@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+$black: hsl(0, 0%, 0%);
+$white: hsl(0, 0%, 100%);
+$dark-gray: hsl(0, 0%, 63%);
+$very-dark-gray: hsl(0, 0%, 27%);
+$content-margin: 70px 30px;
+
+@mixin flexbox($direction, $justify, $align, $gap) {
+	display: flex;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $align;
+	gap: $gap;
+}
+
+:root {
+	font-size: 12px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Spartan', sans-serif;
+	color: $black;
+
+	.img {
+		height: 300px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.hero-img {
+		height: 500px;
+		position: relative;
+
+		nav {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 20%;
+			@include flexbox(row, center, center, 0);
+
+			.burger-btn {
+				position: absolute;
+				top: 50%;
+				left: 20px;
+				height: 20px;
+				aspect-ratio: 1/1;
+				transform: translateY(-50%);
+				background-image: url('./images/icon-hamburger.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+
+				&:hover {
+					cursor: pointer;
+				}
+			}
+
+			.logo {
+				height: 100%;
+				width: 80px;
+				background-image: url('./images/logo.svg');
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+
+			.nav-container {
+				padding: 0 30px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: $white;
+				@include flexbox(row, space-between, center, 20px);
+				transform: translateY(-100%);
+
+				.close-btn {
+					background-image: url('./images/icon-close.svg');
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: contain;
+					height: 20px;
+					aspect-ratio: 1/1;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+
+				.nav-tabs {
+					width: 80%;
+					@include flexbox(row, space-between, center, 10px);
+					flex-wrap: wrap;
+					font-weight: 700;
+
+					a {
+						position: relative;
+						text-transform: lowercase;
+
+						&::after {
+							content: '';
+							position: absolute;
+							left: 20%;
+							right: 20%;
+							bottom: 0;
+							height: 2px;
+							background-color: $black;
+							transform: translateY(10px);
+							opacity: 0;
+						}
+
+						&:hover {
+							&::after {
+								opacity: 1;
+							}
+						}
+					}
+				}
+
+				&.shown {
+					transform: translateY(0);
+				}
+			}
+		}
+
+		.slider-btns {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 30%;
+			aspect-ratio: 2/1;
+			@include flexbox(row, center, center, 0);
+
+			.slider-btn {
+				height: 100%;
+				width: 50%;
+				background-color: $black;
+				background-repeat: no-repeat;
+				background-position: center;
+
+				&.left {
+					background-image: url('./images/icon-angle-left.svg');
+				}
+
+				&.right {
+					background-image: url('./images/icon-angle-right.svg');
+				}
+
+				&:hover {
+					cursor: pointer;
+					background-color: $very-dark-gray;
+				}
+			}
+		}
+	}
+
+	.about-img-1 {
+		background-image: url('./images/image-about-dark.jpg');
+	}
+
+	.about-img-2 {
+		background-image: url('./images/image-about-light.jpg');
+		position: relative;
+
+		.attribution {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 10px;
+			font-size: 11px;
+			text-align: center;
+
+			a {
+				color: hsl(228, 45%, 44%);
+			}
+		}
+	}
+
+	.intro-container,
+	.about-container {
+		@include flexbox(row, center, center, 0);
+	}
+
+	.intro-container {
+		.intro-content {
+			margin: $content-margin;
+			max-width: 450px;
+
+			.intro-heading {
+				font-size: 2.5rem;
+			}
+
+			.shop-now-btn {
+				height: 30px;
+				width: fit-content;
+				margin-top: 30px;
+				text-transform: uppercase;
+				@include flexbox(row, flex-start, center, 10px);
+				font-weight: 600;
+				letter-spacing: 1ch;
+
+				.shop-now-arrow {
+					width: 40px;
+					height: 100%;
+					background-image: url('./images/icon-arrow.svg');
+					background-position: center;
+					background-repeat: no-repeat;
+					background-size: contain;
+					transition: 0.5s;
+				}
+
+				&:hover {
+					color: $dark-gray;
+
+					.shop-now-arrow {
+						transform: translateX(20px);
+					}
+				}
+			}
+		}
+	}
+
+	.about-container {
+		.about-content {
+			max-width: 450px;
+			margin: $content-margin;
+
+			.about-heading {
+				text-transform: uppercase;
+				letter-spacing: 0.3rem;
+			}
+		}
+	}
+
+	.small-text {
+		color: $dark-gray;
+		line-height: 1.6rem;
+		font-weight: 600;
+	}
+}
+
+a {
+	text-decoration: none;
+
+	&:link,
+	&:visited,
+	&:active {
+		color: inherit;
+	}
+}
+
+@media (min-width: 501px) {
+	body {
+		height: 100vh;
+		display: grid;
+		grid-template-columns: 3fr 3fr 1fr 3fr;
+		grid-template-rows: 2fr 1fr;
+		grid-template-areas:
+			'hero-img hero-img intro intro'
+			'about-img-1 about about about-img-2';
+
+		.hero-img {
+			grid-area: hero-img;
+			height: 100%;
+
+			nav {
+				@include flexbox(row, flex-start, center, 50px);
+				padding: 0 50px;
+
+				.burger-btn {
+					display: none;
+				}
+
+				.nav-container {
+					position: initial;
+					background-color: initial;
+					transform: initial;
+					width: 50%;
+					padding: 0;
+
+					.close-btn {
+						display: none;
+					}
+
+					.nav-tabs {
+						width: 100%;
+						color: $white;
+
+						a {
+							&::after {
+								background-color: $white;
+							}
+						}
+					}
+				}
+			}
+
+			.slider-btns {
+				left: 100%;
+				width: 16.7%;
+			}
+		}
+
+		.intro-container {
+			grid-area: intro;
+		}
+
+		.about-img-1 {
+			grid-area: about-img-1;
+			height: 100%;
+		}
+
+		.about-container {
+			grid-area: about;
+		}
+
+		.about-img-2 {
+			grid-area: about-img-2;
+			height: 100%;
+		}
+	}
+}
